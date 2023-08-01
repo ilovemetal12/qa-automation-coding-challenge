@@ -21,6 +21,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "testE2E":"node_modules/.bin/cucumber-js src/features-e2e/step-Definitions/app.feature",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -37,5 +38,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@cucumber/cucumber": "^9.3.0"
   }
 }
