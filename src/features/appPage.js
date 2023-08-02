@@ -14,6 +14,7 @@ class AppPage {
     // ---Locators---
     this.searchInputLocator = By.id("username");
     this.submitButtonLocator = By.css("button[type='submit']");
+    this.messageLocator = By.css(".message-area p");
   }
 
   // ---Methods/Actions---
@@ -36,17 +37,27 @@ class AppPage {
     return await this.driver.getTitle();
   }
 
-  //---Get error message---
-  async getErrorMessage() {
-    //---Waiting the element---
-    const messageElement = await this.driver.wait(
-      until.elementLocated(By.css(".message-area p")),
-      5000 
+  //---Get custom message---
+  async getCustomMessage() {
+    //---Waiting,extracting and parsing the element and returning the text---
+    return await this.driver
+      .wait(until.elementLocated(this.messageLocator), 5000)
+      .getText();
+  }
+  //---Get Repos list---
+
+  async getReposList() {
+    //---Waiting and locating the listContainer--- 
+    const listContainer = await this.driver.wait(
+      until.elementLocated(By.css(".repo-list-container")),
+      5000
     );
-
-
-    //---Extracting text and returning---
-    return  messageElement.getText();
+  
+    //---Extracting the li elements inside de container---
+    const reposElements = await listContainer.findElements(By.css("li"));
+  
+    //---Sending back the number of elements---
+    return reposElements.length;
   }
 }
 

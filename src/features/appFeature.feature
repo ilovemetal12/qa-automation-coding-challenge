@@ -10,3 +10,12 @@ Given An unexisting github username
 When the user searches the username
 Then the platform should display an error
 
+Scenario: Search a existing github user generates a success message
+Given An existing github username
+When the user searches the existing username
+Then the platform should display a success message
+
+Scenario: Search a existing github user
+Given An existing github username
+When the user searches the existing username
+Then the platform should display the number of repos
